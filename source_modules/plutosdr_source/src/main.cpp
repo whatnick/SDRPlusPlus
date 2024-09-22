@@ -129,8 +129,10 @@ private:
             std::string desc = iio_context_info_get_description(info);
             std::string duri = iio_context_info_get_uri(info);
 
-            // If the device is not a plutosdr, don't include it
-            if (desc.find("PlutoSDR") == std::string::npos) {
+            // If the device is not an sdr, don't include it
+            // Looking for generic SDR keyword captures AntSDR and
+            // other PlutoSDR clones
+            if (desc.find("SDR") == std::string::npos) {
                 flog::warn("Ignored IIO device: [{}] {}", duri, desc);
                 continue;
             }
